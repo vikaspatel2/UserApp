@@ -6,12 +6,10 @@ namespace WebApplication1.Data
 {
     public class AppDbContext : IdentityDbContext<Users>
     {
-        public AppDbContext(DbContextOptions options) : base(options)
-        {
-        }
-
-        protected AppDbContext()
+        public AppDbContext(DbContextOptions<AppDbContext> options)
+            : base(options)
         {
         }
     }
+
 }
