@@ -1,0 +1,40 @@
+﻿@model IEnumerable<WebApplication1.Models.Users>
+
+<h2>User List</h2>
+<table>
+    <thead>
+        <tr>
+            <th>UserName</th>
+            <th>FullName</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Created By</th>
+            <th>Created At</th>
+            <th>Modified By</th>
+            <th>Modified At</th>
+            <th>Deleted By</th>
+            <th>Deleted At</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.UserName</td>
+                <td>@user.FullName</td>
+                <td>@user.Email</td>
+                <td>@user.Role</td>
+                <td>@user.CreateUid</td>
+                <td>@user.CreateDt</td>
+                <td>@user.LModifyBy</td>
+                <td>@user.LModifyDt</td>
+                <td>@user.DelUid</td>
+                <td>@user.DelDt</td>
+                <td>
+                    <!-- Edit/Delete buttons will go here -->
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

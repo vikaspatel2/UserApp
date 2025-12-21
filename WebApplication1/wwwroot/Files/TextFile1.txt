@@ -1,0 +1,765 @@
+﻿USE [HMS]
+GO
+/****** Object:  Table [dbo].[Administrators]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Administrators](
+	[admin_id] [int] NOT NULL,
+	[username] [varchar](50) NULL,
+	[password] [varchar](50) NULL,
+	[first_name] [varchar](50) NULL,
+	[last_name] [varchar](50) NULL,
+	[email] [varchar](100) NULL,
+	[phone] [varchar](20) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[admin_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Amenities]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Amenities](
+	[amenity_id] [int] NOT NULL,
+	[name] [varchar](100) NULL,
+	[description] [text] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[amenity_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[EmployeeAttendance]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[EmployeeAttendance](
+	[attendance_id] [int] NOT NULL,
+	[employee_id] [int] NULL,
+	[check_in_time] [datetime] NULL,
+	[check_out_time] [datetime] NULL,
+	[date] [date] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[attendance_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Employees]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Employees](
+	[employee_id] [int] NOT NULL,
+	[first_name] [varchar](50) NULL,
+	[last_name] [varchar](50) NULL,
+	[position] [varchar](50) NULL,
+	[email] [varchar](100) NULL,
+	[phone] [varchar](20) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[employee_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[EmployeeSalaries]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[EmployeeSalaries](
+	[salary_id] [int] NOT NULL,
+	[employee_id] [int] NULL,
+	[salary_amount] [decimal](10, 2) NULL,
+	[pay_date] [date] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[salary_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[EmployeesDepartments]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[EmployeesDepartments](
+	[employee_id] [int] NOT NULL,
+	[department_id] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[employee_id] ASC,
+	[department_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[HotelDepartments]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[HotelDepartments](
+	[department_id] [int] NOT NULL,
+	[name] [varchar](100) NULL,
+	[description] [text] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[department_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[HotelFacilities]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[HotelFacilities](
+	[facility_id] [int] NOT NULL,
+	[name] [varchar](100) NULL,
+	[description] [text] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[facility_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[HotelFacilitiesRooms]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[HotelFacilitiesRooms](
+	[hotel_id] [int] NOT NULL,
+	[facility_id] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[hotel_id] ASC,
+	[facility_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[HotelImages]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[HotelImages](
+	[image_id] [int] NOT NULL,
+	[hotel_id] [int] NULL,
+	[image_url] [varchar](255) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[image_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[HotelPromotions]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[HotelPromotions](
+	[promotion_id] [int] NOT NULL,
+	[hotel_id] [int] NULL,
+	[title] [varchar](100) NULL,
+	[description] [text] NULL,
+	[start_date] [date] NULL,
+	[end_date] [date] NULL,
+	[discount_percentage] [decimal](5, 2) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[promotion_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[HotelReviews]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[HotelReviews](
+	[review_id] [int] NOT NULL,
+	[hotel_id] [int] NULL,
+	[user_id] [int] NULL,
+	[rating] [decimal](2, 1) NULL,
+	[comment] [text] NULL,
+	[created_at] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[review_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Hotels]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Hotels](
+	[hotel_id] [int] NOT NULL,
+	[name] [varchar](100) NULL,
+	[description] [text] NULL,
+	[address] [varchar](100) NULL,
+	[city] [varchar](50) NULL,
+	[country] [varchar](50) NULL,
+	[star_rating] [decimal](2, 1) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[hotel_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[OrderItems]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[OrderItems](
+	[order_id] [int] NOT NULL,
+	[item_id] [int] NOT NULL,
+	[quantity] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[order_id] ASC,
+	[item_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PaymentMethods]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PaymentMethods](
+	[payment_method_id] [int] NOT NULL,
+	[name] [varchar](50) NULL,
+	[description] [text] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[payment_method_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Payments]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Payments](
+	[payment_id] [int] NOT NULL,
+	[reservation_id] [int] NULL,
+	[user_id] [int] NULL,
+	[payment_date] [date] NULL,
+	[amount] [decimal](10, 2) NULL,
+	[payment_method_id] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[payment_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Reservations]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Reservations](
+	[reservation_id] [int] NOT NULL,
+	[user_id] [int] NULL,
+	[room_id] [int] NULL,
+	[check_in_date] [date] NULL,
+	[check_out_date] [date] NULL,
+	[total_price] [decimal](10, 2) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[reservation_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Reviews]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Reviews](
+	[review_id] [int] NOT NULL,
+	[hotel_id] [int] NULL,
+	[user_id] [int] NULL,
+	[rating] [decimal](2, 1) NULL,
+	[comment] [text] NULL,
+	[created_at] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[review_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[RoomCategories]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RoomCategories](
+	[category_id] [int] NOT NULL,
+	[category_name] [varchar](50) NULL,
+	[description] [text] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[category_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[RoomFacilities]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RoomFacilities](
+	[facility_id] [int] NOT NULL,
+	[facility_name] [varchar](100) NULL,
+	[description] [text] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[facility_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[RoomImages]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RoomImages](
+	[image_id] [int] NOT NULL,
+	[room_id] [int] NULL,
+	[image_url] [varchar](255) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[image_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[RoomRatings]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RoomRatings](
+	[rating_id] [int] NOT NULL,
+	[room_id] [int] NULL,
+	[user_id] [int] NULL,
+	[rating] [decimal](2, 1) NULL,
+	[comment] [text] NULL,
+	[created_at] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[rating_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Rooms]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Rooms](
+	[room_id] [int] NOT NULL,
+	[hotel_id] [int] NULL,
+	[room_number] [int] NULL,
+	[type] [varchar](50) NULL,
+	[description] [text] NULL,
+	[price_per_night] [decimal](8, 2) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[room_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[RoomServiceItems]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RoomServiceItems](
+	[item_id] [int] NOT NULL,
+	[name] [varchar](100) NULL,
+	[description] [text] NULL,
+	[price] [decimal](10, 2) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[item_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[RoomServiceOrders]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RoomServiceOrders](
+	[order_id] [int] NOT NULL,
+	[user_id] [int] NULL,
+	[room_id] [int] NULL,
+	[order_date] [datetime] NULL,
+	[status] [varchar](50) NULL,
+	[total_price] [decimal](10, 2) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[order_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[RoomStatus]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RoomStatus](
+	[status_id] [int] NOT NULL,
+	[status_name] [varchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[status_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[RoomTypes]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RoomTypes](
+	[type_id] [int] NOT NULL,
+	[type_name] [varchar](50) NULL,
+	[description] [text] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[type_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Users]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Users](
+	[user_id] [int] NOT NULL,
+	[username] [varchar](50) NULL,
+	[password] [varchar](50) NULL,
+	[first_name] [varchar](50) NULL,
+	[last_name] [varchar](50) NULL,
+	[email] [varchar](100) NULL,
+	[phone] [varchar](20) NULL,
+	[address] [varchar](100) NULL,
+	[city] [varchar](50) NULL,
+	[country] [varchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[user_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[EmployeeAttendance]  WITH CHECK ADD FOREIGN KEY([employee_id])
+REFERENCES [dbo].[Employees] ([employee_id])
+GO
+ALTER TABLE [dbo].[EmployeeSalaries]  WITH CHECK ADD FOREIGN KEY([employee_id])
+REFERENCES [dbo].[Employees] ([employee_id])
+GO
+ALTER TABLE [dbo].[EmployeesDepartments]  WITH CHECK ADD FOREIGN KEY([department_id])
+REFERENCES [dbo].[HotelDepartments] ([department_id])
+GO
+ALTER TABLE [dbo].[EmployeesDepartments]  WITH CHECK ADD FOREIGN KEY([employee_id])
+REFERENCES [dbo].[Employees] ([employee_id])
+GO
+ALTER TABLE [dbo].[HotelFacilitiesRooms]  WITH CHECK ADD FOREIGN KEY([facility_id])
+REFERENCES [dbo].[HotelFacilities] ([facility_id])
+GO
+ALTER TABLE [dbo].[HotelFacilitiesRooms]  WITH CHECK ADD FOREIGN KEY([hotel_id])
+REFERENCES [dbo].[Hotels] ([hotel_id])
+GO
+ALTER TABLE [dbo].[HotelImages]  WITH CHECK ADD FOREIGN KEY([hotel_id])
+REFERENCES [dbo].[Hotels] ([hotel_id])
+GO
+ALTER TABLE [dbo].[HotelPromotions]  WITH CHECK ADD FOREIGN KEY([hotel_id])
+REFERENCES [dbo].[Hotels] ([hotel_id])
+GO
+ALTER TABLE [dbo].[HotelReviews]  WITH CHECK ADD FOREIGN KEY([hotel_id])
+REFERENCES [dbo].[Hotels] ([hotel_id])
+GO
+ALTER TABLE [dbo].[HotelReviews]  WITH CHECK ADD FOREIGN KEY([review_id])
+REFERENCES [dbo].[Reviews] ([review_id])
+GO
+ALTER TABLE [dbo].[HotelReviews]  WITH CHECK ADD FOREIGN KEY([user_id])
+REFERENCES [dbo].[Users] ([user_id])
+GO
+ALTER TABLE [dbo].[OrderItems]  WITH CHECK ADD FOREIGN KEY([item_id])
+REFERENCES [dbo].[RoomServiceItems] ([item_id])
+GO
+ALTER TABLE [dbo].[OrderItems]  WITH CHECK ADD FOREIGN KEY([order_id])
+REFERENCES [dbo].[RoomServiceOrders] ([order_id])
+GO
+ALTER TABLE [dbo].[Payments]  WITH CHECK ADD FOREIGN KEY([payment_method_id])
+REFERENCES [dbo].[PaymentMethods] ([payment_method_id])
+GO
+ALTER TABLE [dbo].[Payments]  WITH CHECK ADD FOREIGN KEY([reservation_id])
+REFERENCES [dbo].[Reservations] ([reservation_id])
+GO
+ALTER TABLE [dbo].[Payments]  WITH CHECK ADD FOREIGN KEY([user_id])
+REFERENCES [dbo].[Users] ([user_id])
+GO
+ALTER TABLE [dbo].[Reservations]  WITH CHECK ADD FOREIGN KEY([room_id])
+REFERENCES [dbo].[Rooms] ([room_id])
+GO
+ALTER TABLE [dbo].[Reservations]  WITH CHECK ADD FOREIGN KEY([user_id])
+REFERENCES [dbo].[Users] ([user_id])
+GO
+ALTER TABLE [dbo].[Reviews]  WITH CHECK ADD FOREIGN KEY([hotel_id])
+REFERENCES [dbo].[Hotels] ([hotel_id])
+GO
+ALTER TABLE [dbo].[Reviews]  WITH CHECK ADD FOREIGN KEY([user_id])
+REFERENCES [dbo].[Users] ([user_id])
+GO
+ALTER TABLE [dbo].[RoomImages]  WITH CHECK ADD FOREIGN KEY([room_id])
+REFERENCES [dbo].[Rooms] ([room_id])
+GO
+ALTER TABLE [dbo].[RoomRatings]  WITH CHECK ADD FOREIGN KEY([rating_id])
+REFERENCES [dbo].[Reviews] ([review_id])
+GO
+ALTER TABLE [dbo].[RoomRatings]  WITH CHECK ADD FOREIGN KEY([room_id])
+REFERENCES [dbo].[Rooms] ([room_id])
+GO
+ALTER TABLE [dbo].[RoomRatings]  WITH CHECK ADD FOREIGN KEY([user_id])
+REFERENCES [dbo].[Users] ([user_id])
+GO
+ALTER TABLE [dbo].[Rooms]  WITH CHECK ADD FOREIGN KEY([hotel_id])
+REFERENCES [dbo].[Hotels] ([hotel_id])
+GO
+ALTER TABLE [dbo].[RoomServiceOrders]  WITH CHECK ADD FOREIGN KEY([room_id])
+REFERENCES [dbo].[Rooms] ([room_id])
+GO
+ALTER TABLE [dbo].[RoomServiceOrders]  WITH CHECK ADD FOREIGN KEY([user_id])
+REFERENCES [dbo].[Users] ([user_id])
+GO
+/****** Object:  StoredProcedure [dbo].[DeleteAmenity]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[DeleteAmenity]
+  @amenity_id INT
+AS
+BEGIN
+  DELETE FROM Amenities
+  WHERE amenity_id = @amenity_id
+END
+GO
+/****** Object:  StoredProcedure [dbo].[DeleteReservation]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[DeleteReservation]
+  @reservation_id INT
+AS
+BEGIN
+  DELETE FROM Reservations
+  WHERE reservation_id = @reservation_id
+END
+GO
+/****** Object:  StoredProcedure [dbo].[DeleteRoom]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[DeleteRoom]
+  @room_id INT
+AS
+BEGIN
+  DELETE FROM Rooms
+  WHERE room_id = @room_id
+END
+GO
+/****** Object:  StoredProcedure [dbo].[DeleteUser]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[DeleteUser]
+  @user_id INT
+AS
+BEGIN
+  DELETE FROM Users
+  WHERE user_id = @user_id
+END
+GO
+/****** Object:  StoredProcedure [dbo].[InsertAmenity]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[InsertAmenity]
+  @name VARCHAR(100),
+  @description TEXT
+AS
+BEGIN
+  INSERT INTO Amenities (name, description)
+  VALUES (@name, @description)
+END
+GO
+/****** Object:  StoredProcedure [dbo].[InsertReservation]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[InsertReservation]
+  @user_id INT,
+  @room_id INT,
+  @check_in_date DATE,
+  @check_out_date DATE,
+  @total_price DECIMAL(10, 2)
+AS
+BEGIN
+  INSERT INTO Reservations (user_id, room_id, check_in_date, check_out_date, total_price)
+  VALUES (@user_id, @room_id, @check_in_date, @check_out_date, @total_price)
+END
+GO
+/****** Object:  StoredProcedure [dbo].[InsertRoom]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[InsertRoom]
+  @hotel_id INT,
+  @room_number INT,
+  @type VARCHAR(50),
+  @description TEXT,
+  @price_per_night DECIMAL(8, 2)
+AS
+BEGIN
+  INSERT INTO Rooms (hotel_id, room_number, type, description, price_per_night)
+  VALUES (@hotel_id, @room_number, @type, @description, @price_per_night)
+END
+GO
+/****** Object:  StoredProcedure [dbo].[InsertUser]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[InsertUser]
+  @username VARCHAR(50),
+  @password VARCHAR(50),
+  @first_name VARCHAR(50),
+  @last_name VARCHAR(50),
+  @email VARCHAR(100),
+  @phone VARCHAR(20),
+  @address VARCHAR(100),
+  @city VARCHAR(50),
+  @country VARCHAR(50)
+AS
+BEGIN
+  INSERT INTO Users (username, password, first_name, last_name, email, phone, address, city, country)
+  VALUES (@username, @password, @first_name, @last_name, @email, @phone, @address, @city, @country)
+END
+GO
+/****** Object:  StoredProcedure [dbo].[UpdateAmenity]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[UpdateAmenity]
+  @amenity_id INT,
+  @name VARCHAR(100),
+  @description TEXT
+AS
+BEGIN
+  UPDATE Amenities
+  SET name = @name,
+      description = @description
+  WHERE amenity_id = @amenity_id
+END
+GO
+/****** Object:  StoredProcedure [dbo].[UpdateReservation]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[UpdateReservation]
+  @reservation_id INT,
+  @user_id INT,
+  @room_id INT,
+  @check_in_date DATE,
+  @check_out_date DATE,
+  @total_price DECIMAL(10, 2)
+AS
+BEGIN
+  UPDATE Reservations
+  SET user_id = @user_id,
+      room_id = @room_id,
+      check_in_date = @check_in_date,
+      check_out_date = @check_out_date,
+      total_price = @total_price
+  WHERE reservation_id = @reservation_id
+END
+GO
+/****** Object:  StoredProcedure [dbo].[UpdateRoom]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[UpdateRoom]
+  @room_id INT,
+  @hotel_id INT,
+  @room_number INT,
+  @type VARCHAR(50),
+  @description TEXT,
+  @price_per_night DECIMAL(8, 2)
+AS
+BEGIN
+  UPDATE Rooms
+  SET hotel_id = @hotel_id,
+      room_number = @room_number,
+      type = @type,
+      description = @description,
+      price_per_night = @price_per_night
+  WHERE room_id = @room_id
+END
+GO
+/****** Object:  StoredProcedure [dbo].[UpdateUser]    Script Date: 21-12-2025 17:14:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[UpdateUser]
+  @user_id INT,
+  @username VARCHAR(50),
+  @password VARCHAR(50),
+  @first_name VARCHAR(50),
+  @last_name VARCHAR(50),
+  @email VARCHAR(100),
+  @phone VARCHAR(20),
+  @address VARCHAR(100),
+  @city VARCHAR(50),
+  @country VARCHAR(50)
+AS
+BEGIN
+  UPDATE Users
+  SET username = @username,
+      password = @password,
+      first_name = @first_name,
+      last_name = @last_name,
+      email = @email,
+      phone = @phone,
+      address = @address,
+      city = @city,
+      country = @country
+  WHERE user_id = @user_id
+END
+GO

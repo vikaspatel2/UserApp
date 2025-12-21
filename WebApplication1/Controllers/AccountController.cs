@@ -26,7 +26,21 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+                // Find user by email
+                var user = await userManager.FindByEmailAsync(model.Email);
+                if (user == null)
+                {
+                    ModelState.AddModelError("", "Email or password is incorrect.");
+                    return View(model);
+                }
+
+                // Sign-in requires username, not email
+                var result = await signInManager.PasswordSignInAsync(
+                    user.UserName,
+                    model.Password,
+                    model.RememberMe,
+                    lockoutOnFailure: false
+                );
 
                 if (result.Succeeded)
                 {
@@ -38,6 +52,7 @@ namespace WebApplication1.Controllers
                     return View(model);
                 }
             }
+
             return View(model);
         }
 
@@ -55,7 +70,7 @@ namespace WebApplication1.Controllers
                 {
                     FullName = model.FullName,
                     Email = model.Email,
-                    UserName = model.Email,
+                    UserName = model.Email, // This makes login with email easy
                 };
 
                 var result = await userManager.CreateAsync(users, model.Password);
@@ -70,8 +85,6 @@ namespace WebApplication1.Controllers
                     {
                         ModelState.AddModelError("", error.Description);
                     }
-
-                    return View(model);
                 }
             }
             return View(model);
@@ -87,8 +100,8 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await userManager.FindByNameAsync(model.Email);
-
+                // Use FindByEmailAsync for clarity
+                var user = await userManager.FindByEmailAsync(model.Email);
                 if (user == null)
                 {
                     ModelState.AddModelError("", "Something is wrong!");
@@ -116,37 +129,44 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await userManager.FindByNameAsync(model.Email);
+                // Use FindByEmailAsync for consistency
+                var user = await userManager.FindByEmailAsync(model.Email);
                 if (user != null)
                 {
-                    var result = await userManager.RemovePasswordAsync(user);
-                    if (result.Succeeded)
+                    var removeResult = await userManager.RemovePasswordAsync(user);
+                    if (removeResult.Succeeded)
                     {
-                        result = await userManager.AddPasswordAsync(user, model.NewPassword);
-                        return RedirectToAction("Login", "Account");
+                        var addResult = await userManager.AddPasswordAsync(user, model.NewPassword);
+                        if (addResult.Succeeded)
+                        {
+                            return RedirectToAction("Login", "Account");
+                        }
+                        else
+                        {
+                            foreach (var error in addResult.Errors)
+                            {
+                                ModelState.AddModelError("", error.Description);
+                            }
+                        }
                     }
                     else
                     {
-
-                        foreach (var error in result.Errors)
+                        foreach (var error in removeResult.Errors)
                         {
                             ModelState.AddModelError("", error.Description);
                         }
-
-                        return View(model);
                     }
                 }
                 else
                 {
                     ModelState.AddModelError("", "Email not found!");
-                    return View(model);
                 }
             }
             else
             {
-                ModelState.AddModelError("", "Something went wrong. try again.");
-                return View(model);
+                ModelState.AddModelError("", "Something went wrong. Try again.");
             }
+            return View(model);
         }
 
         public async Task<IActionResult> Logout()

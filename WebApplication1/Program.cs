@@ -29,11 +29,11 @@ builder.Services.AddIdentity<Users, IdentityRole>(option =>
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    db.Database.EnsureCreated();   // Force DB + Tables
-}
+//using (var scope = app.Services.CreateScope())
+//{
+//    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+//    db.Database.EnsureCreated();   // Force DB + Tables
+//}
 
 
 // Configure the HTTP request pipeline.
